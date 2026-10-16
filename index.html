@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Продовжити</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff;
+      color: #222;
+    }
+    main { max-width: 360px; }
+    h2 { font-size: 23px; }
+    p { line-height: 1.6; }
+    .finger {
+      font-size: 76px;
+      margin: 24px 0;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 24px;
+      background: #1769ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h2>Продовжити у браузері</h2>
+  <p id="message">Відкриваємо сторінку...</p>
+  <div class="finger" id="finger" hidden>👆</div>
+  <a class="btn"
+     id="continue"
+     href="https://nord.affpmelody.com/enFxMO"
+     target="_blank"
+     rel="noopener noreferrer">
+    Відкрити сайт
+  </a>
+</main>
 
+<script>
+(function () {
+  const destination =
+    "https://nord.affpmelody.com/enFxMO";
+
+  const ua = navigator.userAgent;
+  const android = /Android/i.test(ua);
+  const ios = /iPhone|iPad|iPod/i.test(ua);
+
+  const link = document.getElementById("continue");
+  const message = document.getElementById("message");
+  const finger = document.getElementById("finger");
+
+  link.href = destination;
+
+  if (android) {
+    message.textContent =
+      "Якщо сайт не відкрився автоматично, натисніть кнопку нижче.";
+
+    const intent =
+      "intent://nord.affpmelody.com/enFxMO" +
+      "#Intent;scheme=https;" +
+      "package=com.android.chrome;" +
+      "S.browser_fallback_url=" +
+      encodeURIComponent(destination) +
+      ";end";
+
+    window.location.href = intent;
+
+  } else if (ios) {
+    message.textContent =
+      "Натисніть кнопку, щоб перейти на сайт.";
+
+    finger.hidden = false;
+  } else {
+    message.textContent =
+      "Натисніть кнопку, щоб продовжити.";
+  }
+})();
+</script>
+</body>
+</html>
